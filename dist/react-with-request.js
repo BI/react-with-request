@@ -99,21 +99,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(_class, [{
 	      key: 'componentDidMount',
 	      value: function componentDidMount() {
-	        if (shouldFetch(this.props)) {
-	          fetch(this.props, this.handleResponse);
+	        var mergedProps = Object.assign({}, this.props, this.state.propsFromResponse);
+	        if (shouldFetch(mergedProps)) {
+	          fetch(mergedProps, this.handleResponse);
 	        }
 	      }
 	    }, {
 	      key: 'componentDidUpdate',
 	      value: function componentDidUpdate(nextProps) {
-	        if (shouldFetch(this.props, nextProps) && this.state.propsFromResponse === undefined) {
-	          fetch(nextProps, this.handleResponse);
+	        var mergedProps = Object.assign({}, this.props, this.state.propsFromResponse);
+	        var nextMergedProps = Object.assign({}, nextProps, this.state.propsFromResponse);
+	        if (shouldFetch(mergedProps, nextMergedProps)) {
+	          fetch(nextMergedProps, this.handleResponse);
 	        }
 	      }
 	    }, {
 	      key: 'handleResponse',
 	      value: function handleResponse(propsFromResponse) {
-	        this.setState({ propsFromResponse: propsFromResponse });
+	        var _this2 = this;
+
+	        this.setState({ propsFromResponse: propsFromResponse }, function () {
+	          return _this2.props.onLoad(propsFromResponse);
+	        });
 	      }
 	    }, {
 	      key: 'render',

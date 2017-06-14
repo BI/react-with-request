@@ -10,19 +10,22 @@ export default function withRequest(WrappedComponent, shouldFetch, fetch) {
     }
 
     componentDidMount() {
-      if (shouldFetch(this.props)) {
-        fetch(this.props, this.handleResponse)
+      const mergedProps = Object.assign({}, this.props, this.state.propsFromResponse)
+      if (shouldFetch(mergedProps)) {
+        fetch(mergedProps, this.handleResponse)
       }
     }
 
     componentDidUpdate(nextProps) {
-      if (shouldFetch(this.props, nextProps) && this.state.propsFromResponse === undefined) {
-        fetch(nextProps, this.handleResponse)
+      const mergedProps = Object.assign({}, this.props, this.state.propsFromResponse)
+      const nextMergedProps = Object.assign({}, nextProps, this.state.propsFromResponse)
+      if (shouldFetch(mergedProps, nextMergedProps)) {
+        fetch(nextMergedProps, this.handleResponse)
       }
     }
 
     handleResponse(propsFromResponse) {
-      this.setState({ propsFromResponse })
+      this.setState({ propsFromResponse }, () => this.props.onLoad(propsFromResponse))
     }
 
     render() {

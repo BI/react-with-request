@@ -106,7 +106,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, {
 	      key: 'componentDidUpdate',
 	      value: function componentDidUpdate(nextProps) {
-	        if (shouldFetch(this.props, nextProps)) {
+	        if (shouldFetch(this.props, nextProps) && this.state.propsFromResponse === undefined) {
 	          fetch(nextProps, this.handleResponse);
 	        }
 	      }

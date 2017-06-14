@@ -16,7 +16,7 @@ export default function withRequest(WrappedComponent, shouldFetch, fetch) {
     }
 
     componentDidUpdate(nextProps) {
-      if (shouldFetch(this.props, nextProps)) {
+      if (shouldFetch(this.props, nextProps) && this.state.propsFromResponse === undefined) {
         fetch(nextProps, this.handleResponse)
       }
     }

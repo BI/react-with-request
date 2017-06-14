@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this, props));
 
-	      _this.state = { propsFromResponse: undefined };
+	      _this.state = { propsFromResponse: _this.props.initialProps };
 	      _this.handleResponse = _this.handleResponse.bind(_this);
 	      return _this;
 	    }

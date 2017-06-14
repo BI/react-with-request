@@ -10,7 +10,7 @@ export default function withRequest(WrappedComponent, shouldFetch, fetch) {
     }
 
     componentDidMount() {
-      if (shouldFetch(undefined, this.props)) {
+      if (shouldFetch(this.props)) {
         fetch(this.props, this.handleResponse)
       }
     }

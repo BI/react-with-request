@@ -99,7 +99,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _createClass(_class, [{
 	      key: 'componentDidMount',
 	      value: function componentDidMount() {
-	        if (shouldFetch(undefined, this.props)) {
+	        if (shouldFetch(this.props)) {
 	          fetch(this.props, this.handleResponse);
 	        }
 	      }

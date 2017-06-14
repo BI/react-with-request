@@ -5,7 +5,7 @@ export default function withRequest(WrappedComponent, shouldFetch, fetch) {
   return class extends Component {
     constructor(props) {
       super(props)
-      this.state = { propsFromResponse: undefined }
+      this.state = { propsFromResponse: this.props.initialProps }
       this.handleResponse = this.handleResponse.bind(this)
     }
 
